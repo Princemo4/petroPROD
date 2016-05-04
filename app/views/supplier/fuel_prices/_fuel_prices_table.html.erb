@@ -22,19 +22,27 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <% x = 0 %>
                             <% @fuel_prices.each do |f| %>
                             <tr class="gradeX">
-                                <td class="mycell col-md-2"><%= time_ago_in_words(f.created_at) %> ago</td>
+                                <!-- <td class="mycell col-md-2"><%= time_ago_in_words(f.created_at) %> ago</td>
                                 <td class="mycell col-md-1">
                                     <span class="label label-success">Not set</span>
-                                </td>
-                              <!--  <td class="mycell col-md-1">
+                                </td> -->
+                                <td class="mycell col-md-2"><%= time_ago_in_words(f.created_at) %> ago</td>
+                               <% if x < 1 %>
+                                  <td class="mycell col-md-1">
                                     <%= link_to edit_supplier_fuel_price_path(f), remote: true do %>
                                     <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#newFuelPrice">
                                         edit
                                     </button>
                                     <%end%>
-                                </td> -->
+                                  </td>
+                                <% else %>
+                                <td class="mycell col-md-1">
+                                    <span class="label label-success">EXPIRED</span>
+                                </td>
+                                <%end%>
                                 <% prices = {} %>
                                 <% f.fuel_products.each do |product| %>
                                 <% prices[product.fuel] = product.price %>
@@ -110,6 +118,7 @@
                                     <%end%>
                                 </td>
                             </tr>
+                            <% x = x + 1 %>
                             <%end%>
                         </tbody>
 
