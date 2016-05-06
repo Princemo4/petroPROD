@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
                                   elsif supplier? && active?
                                       'NJ' + rand_num + 'SUP'
                                   elsif trucking? && active?
-                                      'NJ' + rand_num + 'TRU'
+                                      'NJ' + rand_num + 'TRK'
                                           end
         end
     end

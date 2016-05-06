@@ -1,8 +1,11 @@
 <% @retailers.each do |retailer| %>
+
 <div class="col-lg-6">
+
 
     <div class="contact-box">
         <%= link_to supplier_retailer_path(retailer) do %>
+
         <div class="col-sm-4">
             <div class="text-center">
                 <%=image_tag( avatar_url(retailer), class: "img-circle m-t-xs img-responsive")%>
@@ -36,4 +39,5 @@
     </div>
 
 </div>
+
 <%end%>

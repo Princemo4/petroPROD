@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  namespace :supplier do
+  get 'profile/show'
+  end
+
+  namespace :supplier do
+  get 'profile/edit'
+  end
+
+  get 'profile/show'
+
+  get 'profile/edit'
+
     resources :users
     get 'login' => 'sessions#new'
     post 'login' => 'sessions#create'
