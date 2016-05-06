@@ -23,6 +23,7 @@ body.full-height-layout #page-wrapper {
 
 body.boxed-layout {
   background: $boxed-backgound;
+  margin-bottom: 100px;
 }
 
 body.boxed-layout #wrapper {
@@ -32,6 +33,7 @@ body.boxed-layout #wrapper {
   -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.75);
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.75);
+  margin-bottom: 100px;
 }
 
 .top-navigation.boxed-layout #wrapper,

@@ -23,6 +23,15 @@ class UsersController < ApplicationController
         end
     end
 
+    def update
+      if current_user.update(user_params)
+        redirect_to supplier_profile_show_path, notice: "User updated successfully"
+      else
+        # FIXME change this to render instead of redirect_to and figure out how to render all the partials and layouts
+        redirect_to supplier_profile_edit_path, alert: "Our appologies! Something didn't update properly. Please try again!"
+      end
+    end
+
     private
 
     def user_params
