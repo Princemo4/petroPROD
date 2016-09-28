@@ -2,16 +2,16 @@ class User < ActiveRecord::Base
     before_save :generate_account_number
     authenticates_with_sorcery!
     attr_accessor :user_supplier, :supplier_number
-    validates :password, length: { minimum: 3 }, if: -> { new_record? || changes['password'] }
-    validates :password, confirmation: true, if: -> { new_record? || changes['password'] }
-    validates :password_confirmation, presence: true, if: -> { new_record? || changes['password'] }
-    validates :email, uniqueness: true, presence: true, if: -> { new_record? || changes['password'] }
-    validates_format_of :email, with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: 'Oops! Looks like the email you provided is not valid. Please fix and resubmit the form.'
-    validates_presence_of :first_name
-    validates_presence_of :last_name
-    validates_presence_of :business_name
-    validates_presence_of :cell_number
-    validates_presence_of :zip_code
+    # validates :password, length: { minimum: 3 }, if: -> { new_record? || changes['password'] }
+    # validates :password, confirmation: true, if: -> { new_record? || changes['password'] }
+    # validates :password_confirmation, presence: true, if: -> { new_record? || changes['password'] }
+    # validates :email, uniqueness: true, presence: true, if: -> { new_record? || changes['password'] }
+    # validates_format_of :email, with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: 'Oops! Looks like the email you provided is not valid. Please fix and resubmit the form.'
+    # validates_presence_of :first_name
+    # validates_presence_of :last_name
+    # validates_presence_of :business_name
+    # validates_presence_of :cell_number
+    # validates_presence_of :zip_code
     enum role: [:pending, :retailer, :supplier, :trucking, :admin]
     enum status: [:inactive, :active, :denied, :archived]
     has_many :stations, foreign_key: :retailer_id

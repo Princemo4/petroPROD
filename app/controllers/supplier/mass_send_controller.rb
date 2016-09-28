@@ -9,7 +9,7 @@ class Supplier::MassSendController < Supplier::ApplicationController
         @texts = current_user.pricerockets.where(status: 0) # and is latest entry
         @texts.all do |text|
             @client.messages.create(
-                from: '+18482299159',
+                from: @from_phone,
                 to: text.to,
                 body: "Hey there! #{find_contact(text.to).first_name}. #{current_user.first_name} from #{current.business_name} just updated the Gas price for today. Regular: $#{find_contact(text.to).retail_prices.last.r_regular}, Medium: $#{find_contact(text.to).retail_prices.last.r_medium},Premium: $#{find_contact(text.to).retail_prices.last.r_premium}, Diesel: $#{find_contact(text.to).retail_prices.last.r_diesel}"
             )
@@ -24,8 +24,5 @@ class Supplier::MassSendController < Supplier::ApplicationController
         @contact = current_user.contacts.find_by(cell_number: phone)
     end
 
-    def set_twilio
-        require 'twilio-ruby'
-        @client = Twilio::REST::Client.new ENV['twilio_account_sid'], ENV['twilio_auth_token']
-    end
+
 end

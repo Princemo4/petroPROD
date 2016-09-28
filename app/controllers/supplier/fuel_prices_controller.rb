@@ -37,8 +37,8 @@ class Supplier::FuelPricesController < Supplier::ApplicationController
                         end
                         @pricerocket = current_user.pricerockets.create(to: retailer.cell_number, body: "ATTN, #{retailer.first_name}! Price update by #{current_user.first_name} from #{current_user.business_name}. New Prices are #{products.join(', ')}")
                         @client.messages.create(
-                            from: '+18482299159',
-                            to: "+1#{retailer.cell_number}",
+                            from: @from_phone,
+                            to: "#{retailer.cell_number}",
                             body: "ATTN, #{retailer.first_name}! Price update by #{current_user.first_name} from #{current_user.business_name}. New Prices are #{products.join(', ')}"
                         )
                         @pricerocket.sent!
@@ -85,8 +85,4 @@ class Supplier::FuelPricesController < Supplier::ApplicationController
         @fuel_price = FuelPrice.find(params[:id])
     end
 
-    def set_twilio
-        require 'twilio-ruby'
-        @client = Twilio::REST::Client.new ENV['twilio_account_sid'], ENV['twilio_auth_token']
-    end
 end

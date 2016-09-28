@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20160423225146) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "connection_retailers", force: :cascade do |t|
     t.integer  "retailer_id"
     t.integer  "status",      default: 0
@@ -123,7 +120,7 @@ ActiveRecord::Schema.define(version: 20160423225146) do
     t.datetime "updated_at",      null: false
   end
 
-  add_index "tanks", ["station_id"], name: "index_tanks_on_station_id", using: :btree
+  add_index "tanks", ["station_id"], name: "index_tanks_on_station_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                            null: false
@@ -150,8 +147,7 @@ ActiveRecord::Schema.define(version: 20160423225146) do
     t.boolean  "terms",            default: false
   end
 
-  add_index "users", ["account_number"], name: "index_users_on_account_number", unique: true, using: :btree
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["account_number"], name: "index_users_on_account_number", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
 
-  add_foreign_key "tanks", "stations"
 end

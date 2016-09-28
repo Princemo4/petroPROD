@@ -1,9 +1,9 @@
 
 default: &default
-  adapter: postgresql
+  adapter: sqlite3
   encoding: unicode
   pool: 5
-  username: petrohub_user
+  username: admin
   password: password
 
 development:
@@ -19,6 +19,7 @@ test:
 
 production:
   <<: *default
+  adapter: postgresql
   database: petrox_production
   username: petrox
   password: <%= ENV['PETROX_DATABASE_PASSWORD'] %>

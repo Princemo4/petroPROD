@@ -17,11 +17,6 @@ class FuelPrice < ActiveRecord::Base
     end
 
     def send_slack
-        require 'slack-ruby-client'
-        Slack.configure do |config|
-            config.token = ENV['SLACK_API_TOKEN']
-        end
-        @slack = Slack::Web::Client.new
         @slack.chat_postMessage(channel: '#latest_prices', text: "#{created_at.strftime('%F')} - #{supplier.first_name} from #{supplier.business_name} just updated the Fuel Prices. #{all_products} ", as_user: true)
     end
 

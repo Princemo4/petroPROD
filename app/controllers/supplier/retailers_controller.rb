@@ -41,8 +41,8 @@ class Supplier::RetailersController < Supplier::ApplicationController
                         end
                         @pricerocket = current_user.pricerockets.create(to: @retailer.cell_number, body: "Hey there! #{@retailer.first_name}. #{current_user.first_name} from #{current_user.business_name} just added you to their Network at Petrohub. Their current Fuel price is #{products.join(', ')}")
                         @client.messages.create(
-                            from: '+18482299159',
-                            to: "+1#{@retailer.cell_number}",
+                            from: @from_phone,
+                            to: "#{@retailer.cell_number}",
                             body: "Hey there! #{@retailer.first_name}. #{current_user.first_name} from #{current_user.business_name} just added you to their Network at Petrohub. Their current Fuel price is #{products.join(', ')}"
                         )
                         @pricerocket.sent!
@@ -84,8 +84,8 @@ class Supplier::RetailersController < Supplier::ApplicationController
             end
             @pricerocket = current_user.pricerockets.create(to: @retailer.cell_number, body: "Hey there! #{@retailer.first_name}. #{current_user.first_name} from #{current_user.business_name} just updated your account on Petrohub. Their current Fuel price is #{products.join(', ')}")
             @client.messages.create(
-                from: '+18482299159',
-                to: "+1#{@retailer.cell_number}",
+                from: @from_phone,
+                to: "#{@retailer.cell_number}",
                 body: "Hey there! #{@retailer.first_name}. #{current_user.first_name} from #{current_user.business_name} just updated your account on Petrohub. Their current Fuel price is #{products.join(', ')}"
             )
             @pricerocket.sent!
@@ -120,8 +120,4 @@ class Supplier::RetailersController < Supplier::ApplicationController
         params.require(:user).permit(:first_name, :last_name, :business_name, :cell_number, :zip_code, :email, :password, :password_confirmation, fuel_formulas_attributes: [:fuel, :margin, :_destroy, :id]).merge(default_params)
      end
 
-    def set_twilio
-        require 'twilio-ruby'
-        @client = Twilio::REST::Client.new ENV['twilio_account_sid'], ENV['twilio_auth_token']
-    end
 end
